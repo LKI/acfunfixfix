@@ -85,10 +85,4 @@
  			return null
  		}
  	}
- 	if (!document.getElementById("keroom")) {
- 		$(document.body).append('<div id="keroom" style="position:fixed;width:490px;right:0;bottom:0;"><div style="width:490px;"><a id="hideroom" class="r btn primary" onclick="$(\'.keframe\').toggle();if($(this).html()==\'收起聊天室\'){$(this).html(\'使用交流~\');setCookie(\'nokeroom\',1);}else{$(this).html(\'收起聊天室\');setCookie(\'nokeroom\',0);}">收起聊天室</a></div><iframe src="http://kekeke.cc/acfunfix" style="width:800px;height:380px;" class="keframe"></iframe></div>');
- 		if (a("nokeroom") == 1) {
- 			$("#hideroom").click()
- 		}
- 	};
  })();
