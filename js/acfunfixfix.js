@@ -3,7 +3,7 @@
  		alert("你拖到书签栏使用了么？书签栏应该是在浏览器地址栏下方的位置。如果你确定你是在书签栏使用的，那么可能你的浏览器太辣鸡（比如360），换个现代的浏览器吧（火狐、谷歌、IE11都行的）");
  		return
  	}
- 	if (document.domain.toLowerCase().indexOf("talkshowcn.com") > 0) {
+ 	if (document.domain.toLowerCase().indexOf("liriansu.com") > 0) {
  		alert("你应该是加到收藏夹或者拖到书签栏，而不是点我");
  		return
  	}
