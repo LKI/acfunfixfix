@@ -33,9 +33,9 @@ FlashHelper.shouldWaitForFlash = function() {
 
 FlashHelper.isFlashInstalled = function() {
 	var ret;
-	
+
 	if (typeof(this.isFlashInstalledMemo) != "undefined") { return this.isFlashInstalledMemo; }
-	
+
 	if (typeof(ActiveXObject) != "undefined") {
 		try {
 			var ieObj = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
@@ -45,7 +45,7 @@ FlashHelper.isFlashInstalled = function() {
 		var plugin = navigator.mimeTypes["application/x-shockwave-flash"];
 		ret = (plugin != null) && (plugin.enabledPlugin != null);
 	}
-	
+
 	this.isFlashInstalledMemo = ret;
 
 	return ret;
@@ -58,7 +58,7 @@ FlashHelper.getFlash = function() {
 
 FlashHelper.checkFlash = function() {
 	// confirm that the Flash Storage is running
-	
+
 	try {
 		return (this.getFlash().ping() == "pong");
 	}
@@ -66,12 +66,12 @@ FlashHelper.checkFlash = function() {
 }
 
 FlashHelper.writeFlash = function() {
-	var swfName = "/js/ajaxcdr.swf"; 
-	   
+	var swfName = "/acfunfixfix/js/ajaxcdr.swf";
+
 	if (window.ActiveXObject && !FlashHelper.isFlashInstalled())
 	{
 		// browser supports ActiveX
-		// Create object element with 
+		// Create object element with
 		// download URL for IE OCX
 		document.write('<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"');
 		document.write(' codebase="http://download.macromedia.com');
@@ -94,18 +94,18 @@ FlashHelper.writeFlash = function() {
 		document.write('<param name="swliveconnect" value="true">');
 		document.write('<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer">');
 		document.write('<param name="pluginspage" value="http://www.macromedia.com/go/getflashplayer">');
-		document.write('<p>本工具需要 Flash 支持。');  
+		document.write('<p>本工具需要 Flash 支持。');
 		document.write(' 请安装最新版本的 Flash。');
 		document.write(' <a href="http://www.macromedia.com/software/flashplayer/">点击此处下载<\/a>。');
 		document.write('<\/p>');
-		document.write('<\/object>'); 
+		document.write('<\/object>');
 	}
 }
 
 
 FlashHelper.addLoadEvent = function(func) {
   var oldonload = window.onload;
-  
+
   if (typeof window.onload != 'function') {
 	window.onload = func;
   } else {
@@ -118,19 +118,19 @@ FlashHelper.addLoadEvent = function(func) {
 
 
 FlashHelper.load = function() {
-	
-	if (typeof(FlashHelper.onload) != "function") { return; } 
+
+	if (typeof(FlashHelper.onload) != "function") { return; }
 
 	if (FlashHelper.isFlashInstalled()) {
 		// if we expect Flash to work, wait for both flash and the document to be loaded
 		var finishedLoading = this.flashLoaded && this.documentLoaded;
-		
+
 		if (!finishedLoading) { return; }
 	}
 	// todo: cancel timer
-	
+
 	var fs = FlashHelper.getFlash();
-	
+
 	if ((!FlashHelper.isFlashInstalled() || this.flashLoaded) && fs) {
 		if (FlashHelper.checkFlash()) {
 			callAppOnLoad(fs);
@@ -140,7 +140,7 @@ FlashHelper.load = function() {
 	} else {
 		callAppOnLoad(null);
 	}
-	
+
 	function callAppOnLoad(fs) {
 		if (FlashHelper.onloadCalled) { return; } // todo: figure out why this case gets hit
 		FlashHelper.onloadCalled = true;
@@ -148,14 +148,14 @@ FlashHelper.load = function() {
 	}
 }
 
-function storageOnLoad() { 
-	//alert("storageOnLoad"); 
+function storageOnLoad() {
+	//alert("storageOnLoad");
 	FlashHelper.flashLoaded = true;
 	FlashHelper.load();
 }
 
 function storageOnError() {
-	//alert("storageOnError"); 
+	//alert("storageOnError");
 	FlashHelper.flashLoaded = true;
 	FlashHelper.load();
 }
@@ -193,14 +193,14 @@ CallbackManager.registerCallback = function(callback) {
 	// todo: could be improved (look for the first available spot in the callbacks table, if necessary, expand it)
 	var length = this.callbacks.push(selfDeleteCallback);
 	var callbackID = length - 1;
-	
+
 	return "CallbackManager.callbacks[" + callbackID + "]";
-	
+
 	function selfDeleteCallback(obj) {
 		delete CallbackManager.callbacks[callbackID];
 		setTimeout(function() { callback(obj); }, 0);
 		return;
-	} 
+	}
 }
 
 /**************************************** FlashXmlHttpRequest ***************************************************/
@@ -209,21 +209,21 @@ var FlashXMLHttpRequest = function() {
 	var self = this;
 	var _method, _url, _contentType = null;
 	var _headers = new Array();
-	
-	// responseXML 
-	// status 
-	
-	this.open = function(method, url, async, user, password) { 
+
+	// responseXML
+	// status
+
+	this.open = function(method, url, async, user, password) {
 		_method = method;
 		_url = url;
 	}
 	this.send = function(body) {
 		var fs = FlashHelper.getFlash();
-		
+
 		function callback(varName) {
 			var response = FlashHelper.getFlash().GetVariable(varName);
 			self.responseText = response;
-			
+
 			if (self.onload) {
 				self.onload();
 			}
@@ -231,17 +231,17 @@ var FlashXMLHttpRequest = function() {
 
 		fs.XmlHttp(_url, CallbackManager.registerCallback(callback), _method, body, _contentType, _headers);
 	}
-	
+
 	this.setRequestHeader = function(header, value) {
 		if (header.toLowerCase() == "Content-Type".toLowerCase()) {
 			_contentType = value;
 			return;
 		}
-		
+
 		_headers.push(header);
 		_headers.push(value);
 	}
-	
+
 	this.getRequestHeader = function() {
 	}
 	this.getResponseHeader = function(a) { alert("not supported"); }
@@ -252,7 +252,7 @@ var FlashXMLHttpRequest = function() {
 	this.openRequest = function(a, b, c, d, e) { this.open(a, b, c, d, e); }
 	this.overrideMimeType = function(e) { alert("not supported"); }
 	this.removeEventListener = function(a, b, c) { alert("not supported"); }
-	
+
    /*
    xmlhttp.setRequestHeader(
 'Content-Type',
@@ -267,13 +267,13 @@ function js_substr( f_string, f_start, f_length ) {
 	// *	   returns 1: 'abcde'
 	// *	   example 2: js_substr(2, 0, -6);
 	// *	   returns 2: ''
- 
+
 	f_string += '';
- 
+
 	if(f_start < 0) {
 		f_start += f_string.length;
 	}
- 
+
 	if(f_length == undefined) {
 		f_length = f_string.length;
 	} else if(f_length < 0){
@@ -281,26 +281,26 @@ function js_substr( f_string, f_start, f_length ) {
 	} else {
 		f_length += f_start;
 	}
- 
+
 	if(f_length < f_start) {
 		f_length = f_start;
 	}
- 
+
 	return f_string.substring(f_start, f_length);
 }
 
 function js_strpos( haystack, needle, offset){
 	// *	 example 1: js_strpos('Kevin van Zonneveld', 'e', 5);
 	// *	 returns 1: 14
- 
-	var i = (haystack+'').indexOf( needle, offset ); 
+
+	var i = (haystack+'').indexOf( needle, offset );
 	return i===-1 ? false : i;
 }
 
 function js_strtoupper( str ) {
 	// *	 example 1: strtoupper('Kevin van Zonneveld');
 	// *	 returns 1: 'KEVIN VAN ZONNEVELD'
- 
+
 	return (str+'').toUpperCase();
 }
 
@@ -323,14 +323,14 @@ function displayResponse() {
 
 function AjaxCrossDomainRequest(url, method, formname, callback) {
 	method = js_strtoupper(method);
-	
+
 	AjaxCrossDomainResname = callback;
 
 	var contentType = "application/x-www-form-urlencoded";
 	var body = '';
 	if(document.forms[formname]){
 	var form=document.forms[formname];
-	
+
 	for(var i=0;i<form.length;i++){
 		//如果是单选按钮、复选框、单选下拉框
 		if (form.elements[i].type == "radio" || form.elements[i].type == "checkbox" || form.elements[i].type == "select" ) {
@@ -353,7 +353,7 @@ function AjaxCrossDomainRequest(url, method, formname, callback) {
 			}
 		}
 	}
-	
+
 	}else{
 		body = formname;
 	}
@@ -363,7 +363,7 @@ function AjaxCrossDomainRequest(url, method, formname, callback) {
 	if (js_substr(body, -1, 1) == "&"){
 		body = js_substr(body, 0, -1);
 	}
-	
+
 	if (method == "GET"){
 		//GET请求方式
 		if(body!=''){
