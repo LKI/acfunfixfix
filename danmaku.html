@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>视频信息及下载</title>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="/acfunfixfix/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/acfunfixfix/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+.main {
+  max-width: 650px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+code a {
+  color:#d14;
+}
+.block {
+  margin:15px 10px;
+}
+em {
+  margin-right:3px;
+}
+h1,h2,h3,h4,h5 {
+  font-weight:bold;
+}
+.avatar {
+  width:24px;
+  height:24px;
+  vertical-align:middle;
+  border-radius:5px;
+}
+.img {
+  width:128px;
+  height:128px;
+  float:right;
+}
+
+.panel {
+  margin-bottom: 10px;
+}
+
+.panel-heading {
+  padding: 5px 10px;
+}
+
+.panel-body {
+  padding: 7px;
+}
+
+.r {
+  float: right;
+}
+</style>
+<script type="text/javascript">
+Number.prototype.formatTime=function(){if(parseInt(this)<1){return '未知';};var h=0,i=0,s=parseInt(this);if(s>60){i=parseInt(s/60);s=parseInt(s%60);}var zero=function(v){return (v>>0)<10?"0"+v:v;};return [zero(i),zero(s)].join(":");};
+
+function getTime(/** timestamp=0 **/) {
+  var ts = arguments[0] || 0;
+  var t,y,m,d,h,i,s;
+  t = ts ? new Date(ts*1000) : new Date();
+  y = t.getFullYear();
+  m = t.getMonth()+1;
+  d = t.getDate();
+  h = t.getHours();
+  i = t.getMinutes();
+  s = t.getSeconds();
+  return y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d)+' '+(h<10?'0'+h:h)+':'+(i<10?'0'+i:i)+':'+(s<10?'0'+s:s);
+}
+
+function readablizeBytes(bytes) {
+  var s = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+  var e = Math.floor(Math.log(bytes)/Math.log(1024));
+  return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+}
+
+function getQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]); return null;
+}
+
+function GE(id){
+  return document.getElementById(id);
+}
+
+function info1(){
+  vid = getQueryString('vid');
+  if(getQueryString('type')=="bilibili"){
+    ac = -1;
+    AjaxCrossDomainRequest('http://ysvideo.sinaapp.com/a/?vid=1|bilibili|'+vid, 'GET', '', 'infodown()');
+    return;
+  }
+  AjaxCrossDomainRequest('http://www.acfun.tv/video/getVideo.aspx?id='+vid, 'GET', '', 'info2()');
+}
+
+function info2(){
+  res = AjaxCrossDomainResponse;
+  console.log(res);
+  if(res.length<20){
+    GE('vinfo').innerHTML="<p><code>Oops...</code> 这位道友，不好意思，找你要的资料的时候被图书馆管理员赶出来了... </p>";
+  }
+  var json = eval('['+res+']');
+  json = json[0];
+  console.log(json);
+  if(json.success){
+    if(json.sourceType.substr(0,4)=='letv'){
+      json.sourceUrl = 'http://yuntv.letv.com/bcloud.html?uu=a04808d307&vu='+json.sourceId;
+    }
+    sourceList={"sina":"新浪视频","youku":"优酷网","youku2":"优酷网v2","tudou":"土豆网","qq":"腾讯视频","qq2":"腾讯视频v2","pps":"PPS.tv","ku6":"酷六网","letv":"乐视云","letv2":"乐视网","sohu":"搜狐视频","iqiyi":"爱奇艺","56":"56网","pptv":"PPTV"};
+    if(json.sourceUrl && json.sourceUrl!=''){
+      if(json.sourceUrl.indexOf("http")<0){
+        if(json.sourceType.substr(0,5)=='youku'){
+          json.sourceUrl = 'http://v.youku.com/v_show/id_'+json.sourceId+'.html';
+        }else{
+          json.sourceUrl = '';
+        }
+      }
+      if(json.sourceUrl!=''){
+        sourceLink = "<a href=\""+json.sourceUrl+"\" target=\"_blank\"><em class=\"glyphicon glyphicon-share\"></em>"+sourceList[json.sourceType]+"</a>";
+      }else{
+        sourceLink = sourceList[json.sourceType];
+      }
+
+    }else{
+      sourceLink = sourceList[json.sourceType];
+    }
+    GE('vinfo').innerHTML="<p>分P名称(PartTitle)：<code>"+json.title+"</code></p><p>视频编号(VideoId)：<code>"+vid+"</code></p><p>视频源编号(SourceId)：<code>"+json.sourceId+"</code></p><p>视频源地址(Source)：<code>"+sourceLink+"</code></p><p>视频时长(Time)：<code>"+json.time.formatTime()+"</code></p><p>视频创建时间(CreateTime)：<code>"+json.createTime+"</code></p><p>游客弹幕(Danmaku)：<code>"+(json.allowDanmaku>0?"关闭":"开启")+"</code></p>";
+    if(json.contentId && json.contentId>0){
+      ac = json.contentId;
+      partText = json.contentId+(parseInt(getQueryString("p"))>1?"_"+getQueryString("p"):"");
+      vidall = vid+'|'+json.sourceType+'|'+json.sourceId;
+      AjaxCrossDomainRequest('http://api.acfun.tv/apiserver/content/info?contentId='+json.contentId+'&version=2', 'GET', '', 'info3()');
+    }else{
+      ac = -1;
+      GE('pinfo').innerHTML="<p><code>Oops...</code> 特殊视频(番剧什么的)，无法获取投稿信息，请直接从下方下载。 </p>";
+      GE('uinfo').innerHTML="<p><code>Oops...</code> 特殊视频(番剧什么的)，无法获取Up主信息，请直接从下方下载。 </p>";
+      AjaxCrossDomainRequest('http://ysvideo.sinaapp.com/a/?vid='+vid+'|'+json.sourceType+'|'+json.sourceId, 'GET', '', 'infodown()');
+    }
+
+  }else{
+    GE('vinfo').innerHTML="<p><code>Oops...</code> 这位仙道，你要的信息炸了 </p>";
+  }
+}
+
+function info3(){
+  res = AjaxCrossDomainResponse;
+  console.log(res);
+  if(res.length<20){
+    GE('pinfo').innerHTML="<p><code>Oops...</code> 投稿信息失败... </p>";
+  }
+  var json = eval('['+res+']');
+  json = json[0];
+  if(json.success){
+    data = json.data.fullContent;
+    console.log(data);
+    GE('uinfo').innerHTML="<p style=\"line-height:24px;\">Up主：<a href=\"http://www.acfun.tv/u/"+data.user.userId+".aspx\" target=\"_blank\"><img class=\"avatar\" src=\""+data.user.userImg+"\"> "+data.user.username+"</a> (Uid: "+data.user.userId+")</p>";
+    GE('pinfo').innerHTML="<p><img class=\"img thumbnail\" src=\""+data.cover+"\"></p><p>AC号(Ac)：<code>"+data.contentId+"</code></p><p>投稿标题(Title)：<code>"+data.title+"</code></p><p>投稿标签(Tags)：<code>"+data.tags.join(",")+"</code></p><p>分P数量(PartCount)：<code>"+data.videos.length+"</code></p><p>投稿时间(ReleaseDate)：<code>"+getTime(data.releaseDate/1000)+"</code></p><p>是否被推荐(IsRecommend)：<code>"+(data.isRecommend>0?"是":"否")+"</code></p><p>点击数(Views)：<code>"+data.views+"</code></p><p>收藏数量(Stows)：<code>"+data.stows+"</code></p><p>评论数量(Comments)：<code>"+data.comments+"</code></p><p>投稿简介(Description)：<small>"+data.description+"</small></p>";
+    AjaxCrossDomainRequest('http://ysvideo.sinaapp.com/a/?vid='+vidall, 'GET', '', 'infodown()');
+  }else{
+
+  }
+}
+
+function infodown(){
+  res = AjaxCrossDomainResponse;
+  console.log(res);
+  if(res.length<20){
+    GE('pinfo').innerHTML="<p><code>Oops...</code> 投稿信息失败... </p>";
+  }
+  var json = eval('['+res+']');
+  json = json[0];
+  if(json.success){
+    data = json.result;
+
+    qualityList = ['C40','C30','C20','C10'];
+    qualityName = ['原画','超清','高清','流畅'];
+    var i = 0;
+    d = '';
+    var file = '';
+    var ft = '';
+    var r = '';
+    var rx = '';
+    for(i=0;i<4;i++){
+      if(cv = data[qualityList[i]]){
+        r = '';
+        if(cv.totalseconds && cv.totalseconds>0){
+          r+= '总时长:<code>'+cv.totalseconds.formatTime()+'</code> ';
+        }
+        if(cv.totalbytes && cv.totalbytes>0){
+          r+= '总大小:<code>'+readablizeBytes(cv.totalbytes)+'</code> ';
+        }
+        d+= '<div class="panel panel-default"><div class="panel-heading">画质: <code>'+cv.quality+'</code><span class="r"><small>'+r+'</small></span></div><div class="panel-body">';
+
+        for(f in cv.files){
+          file = cv.files[f];
+          if(file.url.length>60){
+            ft = file.url.substr(0,25)+'...'+file.url.substr(-25);
+          }else{
+            ft = file.url;
+          }
+          rx = '';
+          if(file.seconds && file.seconds>0){
+            rx+= '<code>'+file.seconds.formatTime()+'</code>';
+          }
+          if(file.bytes && file.bytes>0){
+            if(rx!=''){rx+=', ';}
+            rx+= '<code>'+readablizeBytes(file.bytes)+'</code>';
+          }
+          d+= '<p>第 '+(parseInt(f)+1)+' 段: <code><a href="'+file.url+'" target="blank">'+ft+'</a></code> <small>('+rx+')</small></p>';
+        }
+        d+= '</div></div>';
+      }
+    }
+    d+= '<p>';
+    if(ac>0){
+      d+= '<a href="http://www.flv.cn/?url=http://www.acfun.tv/v/ac'+partText+'" class="btn btn-default" target="_blank">飞驴下载</a> <a href="http://www.flvcd.com/parse.php?format=super&kw=http://www.acfun.tv/v/ac'+partText+'" class="btn btn-default" target="_blank">硕鼠下载</a>';
+    }
+    d+=' <a href="http://danmu.aixifan.com/V2/'+vid class="btn btn-default" target="_blank">弹幕下载</a>';
+    d+= '</p>';
+    d+= '<p>下载到的是 <code>.json</code> 格式的弹幕，并不能直接使用，所以请使用 <code><a href="http://www.dandanplay.com/" target="_blank"><em class="glyphicon glyphicon-save"></em>弹弹Play</a></code> 软件直接播放，或者使用 <code><><em class="glyphicon glyphicon-save"></em>AcFun Localizer</code> 软件转换为 <code>.ass</code> 格式字幕后使用。</p>';
+    GE('dinfo').innerHTML=d;
+  }else{
+
+  }
+}
+</script>
+</head>
+<body onload="setTimeout('info1()',1000)">
+<div class="container">
+  <div class="main">
+    <form id="download" method="post" action="/cc/acfun_export.php" target="_blank">
+      <h2>视频信息及下载</h2>
+      既然来到这个页面了，那么想必你一定是有缘人。今日我便要将这些信息传授予你，你要好好利用它们。切不可妄自菲薄，引喻……不对，拿错剧本了。切不可用它为害武林。在传之予你之前，你先要反复检查下面的 details.
+      <h4>投稿信息</h4>
+      <div class="block" id="pinfo">
+        <p>载入中...</p>
+      </div>
+      <h4>Up主信息</h4>
+      <div class="block" id="uinfo">
+        <p>载入中...</p>
+      </div>
+      <h4>视频信息</h4>
+      <div class="block" id="vinfo">
+        <p>载入中...</p>
+      </div>
+      <h4>下载</h4>
+      <div class="block" id="dinfo">
+        <p>载入中...</p>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript" src="/acfunfixfix/js/ajaxcdr.js"></script>
+</body>
+</html>

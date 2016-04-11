@@ -4,11 +4,11 @@
     return
   }
   if (document.domain.toLowerCase().indexOf("liriansu.com") > 0) {
-    alert("你应该是加到收藏夹或者拖到书签栏，而不是点我");
+    alert("把这个链接加到收藏夹或者拖到书签栏，而不是点我");
     return
   }
   if (document.domain.toLowerCase().indexOf("acfun.") < 0 && document.domain.toLowerCase().indexOf("bilibili.com") < 0) {
-    alert("进AcFun再说...");
+    alert("进AcFun，开个视频，再点我...");
     return
   }
   $.info("AcFun Fix Fix: 欢迎使用 AcFun Fix Fix 2016-04-11 E-mail:liriansu@gmail.com");
