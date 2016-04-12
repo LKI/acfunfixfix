@@ -15,7 +15,7 @@
 
 故建立新分支解决更多问题。
 
-欢迎提Issue.
+欢迎提 Issue 和 Pull Request .
 
 
 [acfun-fix]: http://www.talkshowcn.com/js/acfunfix.html

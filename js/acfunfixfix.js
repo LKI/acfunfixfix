@@ -46,7 +46,8 @@
     "iqiyi": "爱奇艺",
     "56": "56网",
     "pptv": "PPTV",
-    "zhuzhan": "主站"
+    "zhuzhan": "主站",
+    "ac": "主站"
   };
   if(typeof(sourceList[b]) == "undefined"){
     $.ajax({
@@ -59,7 +60,7 @@
       }
     });
   };
-  if (b != "letv" && b != "zhuzhan") {
+  if (b != "letv" && b != "zhuzhan" && b != "ac") {
     if(b == "iqiyi"||b == "pps"){
       $.info("由于一些版权方面的原因，爱奇艺源停止替换播放器。请各位理解。");
     }else{
@@ -68,7 +69,7 @@
       $.info("视频源类型：" + sourceList[b]);
     }
   }else{
-    $.info("乐视云源本程序不会进行任何处理，出现问题是 AcFun 的问题，请联系客服。");
+    $.info("本程序不会对 乐视云源和主站视频源 进行任何处理，出现问题是 AcFun 的问题，请联系客服。");
   }
   window.setCookie = function(d, f) {
     var e = 365;
