@@ -12,10 +12,9 @@
 // @run-at      document-end
 // ==/UserScript==
 
-// 油猴脚本主体来自原AcFun Fix作者，http://www.talkshowcn.com/js/acfunfix.html
-// 本油猴脚本由原作者授权 @补档君 修改，新浪微博http://weibo.com/AcUid1024796
-// 项目重启和主催 @浮云总是梦，新浪微博http://weibo.com/309288216
-// 反馈请戳https://github.com/LKI/acfunfixfix/issues/new
+// 油猴脚本主体来自原AcFun Fix，http://www.talkshowcn.com/js/acfunfix.html
+// 最近修改者：@补档君 ，新浪微博http://weibo.com/AcUid1024796
+// 反馈请戳 https://github.com/LKI/acfunfixfix/issues/new
 (function ($) {
   window._doFix = function () {
     var f = document.createElement('script');
