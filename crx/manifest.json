@@ -5,6 +5,9 @@
   "description": "AcFun Fix Fix，使用原生AcFun播放器替换，修复AcFun播放错误等一系列问题",
   "version": "0.1",
 
+  "icons": {
+      "128": "icon.png"
+  },
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
