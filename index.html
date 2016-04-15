@@ -4,27 +4,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>AcFun Fix Fix</title>
+    <link href="http://liriansu.com/static/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Acfun Fix Fix</h1>
-    <h2>把→<a href="javascript:(function(){var f=document.createElement('script');f.src='http://www.liriansu.com/acfunfixfix/js/acfunfixfix.js?ran='+new Date().getTime();document.body.appendChild(f);})();">AcFun播放器</a>←拖到书签栏里面就可以了</h2>
-    <h2>油猴脚本在这：<a target="_blank" href="http://www.liriansu.com/acfunfixfix/js/acfunfixfix.user.js">AcFun Fix Fix油猴脚本</a></h2>
-    <h2>本工具只用于修复AcFun视频播放错误，禁止用于商业用途</h2>
-    <h2>最近更新日期： 2016-4-14</h2>
-    <h3>下面是一些相关信息</h3>
-    <p>原AcFun Fix地址在这：<a href="http://www.talkshowcn.com/js/acfunfix.html">Acfun Fix</a></p>
-    <p>目前暂由我在AcFun Fix的基础上继续更新</p>
-    <p>各位遇到任何有问题的视频页面可以到<a href="https://github.com/LKI/acfunfixfix/issues/new">Github issue</a>这里提，或者给我邮箱发邮件：liriansu@gmail.com</p>
-    <p>祝各位观众老爷看得开心</p>
-    <h3>更多ChangeLog</h3>
-    <p>4-14: 精简源代码。修复了一个“解析失败刷新”按钮生儿子的Bug。</p>
-    <p>4-12: 增加了对主站云视频的支持，移除了飞驴下载链接，增加油猴脚本</p>
-    <p>4-11: 修正了弹幕下载的地址</p>
-    <p>4-10: 放松了域名的规则，凡是域名含有acfun的都可以尝试转换修复错误。关闭了聊天室。</p>
-    <h3>特别感谢</h3>
-    <ul>
-      <li>AcFun Fix黑科技原作者</li>
-      <li>新浪微博@<a href="http://weibo.com/AcUid1024796">补档君</a></li>
-    </ul>
+    <div class="container">
+      <h1>Acfun Fix Fix</h1>
+      <p class="lead">用法：直接把→<a href="javascript:(function(){var f=document.createElement('script');f.src='http://www.liriansu.com/acfunfixfix/js/acfunfixfix.js?ran='+new Date().getTime();document.body.appendChild(f);})();">AcFun Fix Fix</a>←拖到书签栏里面，然后到AcFun任意视频页面点击这个书签。</p>
+      <p class="lead">油猴(GreaseMonkey)脚本在这里→<a target="_blank" href="http://www.liriansu.com/acfunfixfix/js/acfunfixfix.user.js">AcFun Fix Fix油猴脚本</a></p>
+      <p class="lead">说明：本工具只用于修复AcFun视频播放错误，禁止用于商业用途</p>
+      <p class="lead">最近更新日期： 2016-4-15</p>
+
+      <h2>相关信息</h2>
+      <p>原AcFun Fix地址：<a href="http://www.talkshowcn.com/js/acfunfix.html">Acfun Fix</a></p>
+      <p>AcFun Fix Fix基于AcFun Fix的基础上继续更新。</p>
+      <p>遇到不能转换的页面可以到<a href="https://github.com/LKI/acfunfixfix/issues/new">Github issue</a>这里提，或者给我邮箱发邮件：liriansu@gmail.com</p>
+      <p>祝各位观众老爷看得开心，天下漫友是一家~\(^_^)/~</p>
+
+      <h2>更新日志</h2>
+      <p>4-15: 让描述更精确，放弃了对B站视频转换的尝试</p>
+      <p>4-14: 精简源代码。修复了一个“解析失败刷新”按钮生儿子的Bug。</p>
+      <p>4-12: 增加了对主站云视频的支持，移除了飞驴下载链接，增加油猴脚本</p>
+      <p>4-11: 修正了弹幕下载的地址</p>
+      <p>4-10: 放松了域名的规则，凡是域名含有acfun的都可以尝试转换修复错误。关闭了聊天室。</p>
+
+      <h2>特别感谢</h2>
+      <ul>
+        <li>AcFun Fix黑科技原作者</li>
+        <li>提了很多建议的新浪微博@<a href="http://weibo.com/AcUid1024796">补档君</a></li>
+      </ul>
+
+      <h2>评论区</h2>
+      <!-- 加载Disqus评论 -->
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'liriansu';
+        (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+      </script>
+      <noscript>其实这里理应有评论区，但是你的浏览器不支持…</noscript>
+    </div>
   </body>
 </html>

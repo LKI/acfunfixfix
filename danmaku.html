@@ -1,72 +1,72 @@
 <!doctype html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>视频信息及下载</title>
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="/acfunfixfix/js/bootstrap.min.js" type="text/javascript"></script>
-<link href="/acfunfixfix/css/bootstrap.min.css" rel="stylesheet">
-<style type="text/css">
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
-}
-.main {
-  max-width: 650px;
-  padding: 19px 29px 29px;
-  margin: 0 auto 20px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-code a {
-  color:#d14;
-}
-.block {
-  margin:15px 10px;
-}
-em {
-  margin-right:3px;
-}
-h1,h2,h3,h4,h5 {
-  font-weight:bold;
-}
-.avatar {
-  width:24px;
-  height:24px;
-  vertical-align:middle;
-  border-radius:5px;
-}
-.img {
-  width:128px;
-  height:128px;
-  float:right;
-}
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>视频信息及下载</title>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="/acfunfixfix/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="/acfunfixfix/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+      .main {
+        max-width: 650px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      code a {
+        color:#d14;
+      }
+      .block {
+        margin:15px 10px;
+      }
+      em {
+        margin-right:3px;
+      }
+      h1,h2,h3,h4,h5 {
+        font-weight:bold;
+      }
+      .avatar {
+        width:24px;
+        height:24px;
+        vertical-align:middle;
+        border-radius:5px;
+      }
+      .img {
+        width:128px;
+        height:128px;
+        float:right;
+      }
 
-.panel {
-  margin-bottom: 10px;
-}
+      .panel {
+        margin-bottom: 10px;
+      }
 
-.panel-heading {
-  padding: 5px 10px;
-}
+      .panel-heading {
+        padding: 5px 10px;
+      }
 
-.panel-body {
-  padding: 7px;
-}
+      .panel-body {
+        padding: 7px;
+      }
 
-.r {
-  float: right;
-}
-</style>
-<script type="text/javascript">
-Number.prototype.formatTime=function(){if(parseInt(this)<1){return '未知';};var h=0,i=0,s=parseInt(this);if(s>60){i=parseInt(s/60);s=parseInt(s%60);}var zero=function(v){return (v>>0)<10?"0"+v:v;};return [zero(i),zero(s)].join(":");};
+      .r {
+        float: right;
+      }
+    </style>
+    <script type="text/javascript">
+      Number.prototype.formatTime=function(){if(parseInt(this)<1){return '未知';};var h=0,i=0,s=parseInt(this);if(s>60){i=parseInt(s/60);s=parseInt(s%60);}var zero=function(v){return (v>>0)<10?"0"+v:v;};return [zero(i),zero(s)].join(":");};
 
 function getTime(/** timestamp=0 **/) {
   var ts = arguments[0] || 0;
@@ -240,30 +240,30 @@ function infodown(){
 </script>
 </head>
 <body onload="setTimeout('info1()',1000)">
-<div class="container">
-  <div class="main">
-    <form id="download" method="post" action="/cc/acfun_export.php" target="_blank">
-      <h2>视频信息及下载</h2>
-      既然来到这个页面了，那么想必你一定是有缘人。今日我便要将这些信息传授予你，你要好好利用它们。切不可妄自菲薄，引喻……不对，拿错剧本了。切不可用它为害武林。在传之予你之前，你先要反复检查下面的 details.
-      <h4>投稿信息</h4>
-      <div class="block" id="pinfo">
-        <p>载入中...</p>
-      </div>
-      <h4>Up主信息</h4>
-      <div class="block" id="uinfo">
-        <p>载入中...</p>
-      </div>
-      <h4>视频信息</h4>
-      <div class="block" id="vinfo">
-        <p>载入中...</p>
-      </div>
-      <h4>下载</h4>
-      <div class="block" id="dinfo">
-        <p>载入中...</p>
-      </div>
-    </form>
+  <div class="container">
+    <div class="main">
+      <form id="download" method="post" action="/cc/acfun_export.php" target="_blank">
+        <h2>视频信息及下载</h2>
+        既然来到这个页面了，那么想必你一定是有缘人。今日我便要将这些信息传授予你，你要好好利用它们。切不可妄自菲薄，引喻……不对，拿错剧本了。切不可用它为害武林。在传之予你之前，你先要反复检查下面的 details.
+        <h4>投稿信息</h4>
+        <div class="block" id="pinfo">
+          <p>载入中...</p>
+        </div>
+        <h4>Up主信息</h4>
+        <div class="block" id="uinfo">
+          <p>载入中...</p>
+        </div>
+        <h4>视频信息</h4>
+        <div class="block" id="vinfo">
+          <p>载入中...</p>
+        </div>
+        <h4>下载</h4>
+        <div class="block" id="dinfo">
+          <p>载入中...</p>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-<script type="text/javascript" src="/acfunfixfix/js/ajaxcdr.js"></script>
+  <script type="text/javascript" src="/acfunfixfix/js/ajaxcdr.js"></script>
 </body>
 </html>

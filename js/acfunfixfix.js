@@ -7,11 +7,12 @@
     alert("把这个链接加到收藏夹或者拖到书签栏，而不是点我");
     return
   }
-  if (document.domain.toLowerCase().indexOf("acfun.") < 0 && document.domain.toLowerCase().indexOf("bilibili.com") < 0) {
+  if (document.domain.toLowerCase().indexOf("acfun.") < 0) {
     alert("进AcFun，开个视频，再点我...");
     return
   }
-  $.info("欢迎使用 AcFun Fix Fix 2016-4-14 E-mail:liriansu@gmail.com");
+  $.info("欢迎使用 AcFun Fix Fix 2016-4-15 E-mail:liriansu@gmail.com");
+  $.info("遇到问题可以到 http://liriansu.com/acfunfixfix 这里提");
   var source = $("a.active.primary").data("from");
   window._getPlayer = function() {
     return document.getElementById("ACFlashPlayer-re") || document.getElementById("not-ACFlashPlayer-re") || document.getElementById("area-player");
@@ -61,13 +62,9 @@
     });
   };
   if (source != "letv" && source != "zhuzhan" && source != "ac") {
-    if(source == "iqiyi"||source == "pps"){
-      $.info("由于一些版权方面的原因，爱奇艺源停止替换播放器。请各位理解。");
-    }else{
-      c("http://static.skydust.net/private/acfun/AcPlayer201412121_D.swf", "oldcs=1&host=http://www.talkshowcn.com&vid=" + $("a.active.primary").data("vid") + "|" + source + "|" + $("a.active.primary").data("sid"));
-      if (!document.getElementById("refresh-player")) {$("#video-download").append('<a id="refresh-player" class="btn primary" onclick="$(_getPlayer()).prop(\'outerHTML\',$(_getPlayer()).prop(\'outerHTML\'))" style="float:none;color:#fff;margin-left:8px;" target="_blank"><i class="icon icon-refresh"></i>解析失败请点我刷新</a>');};
-      $.info("视频源类型：" + sourceList[source]);
-    }
+    c("http://static.skydust.net/private/acfun/AcPlayer201412121_D.swf", "oldcs=1&host=http://www.talkshowcn.com&vid=" + $("a.active.primary").data("vid") + "|" + source + "|" + $("a.active.primary").data("sid"));
+    if (!document.getElementById("refresh-player")) {$("#video-download").append('<a id="refresh-player" class="btn primary" onclick="$(_getPlayer()).prop(\'outerHTML\',$(_getPlayer()).prop(\'outerHTML\'))" style="float:none;color:#fff;margin-left:8px;" target="_blank"><i class="icon icon-refresh"></i>解析失败请点我刷新</a>');};
+    $.info("视频源类型：" + sourceList[source]);
   }else{
     $.info("本程序不会对 乐视云源和主站视频源 进行任何处理，出现问题是 AcFun 的问题，请联系客服。");
   }
