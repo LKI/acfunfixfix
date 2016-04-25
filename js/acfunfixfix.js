@@ -7,8 +7,6 @@
     alert("把这个链接加到收藏夹或者拖到书签栏，而不是点我");
     return
   }
-  $.info("欢迎使用 AcFun Fix Fix 2016-4-25");
-  $.info("工具更新与Bug反馈页面 http://liriansu.com/acfunfixfix");
   window._getPlayer = function() {
     return document.getElementById("ACFlashPlayer-re") || document.getElementById("not-ACFlashPlayer-re") || document.getElementById("area-player");
   };
@@ -16,6 +14,8 @@
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
+  $.info("欢迎使用 AcFun Fix Fix 2016-4-25");
+  $.info("工具更新与Bug反馈页面 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.c = function(d, e) {
     player = _getPlayer();
