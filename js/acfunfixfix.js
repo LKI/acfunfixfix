@@ -7,16 +7,16 @@
     alert("把这个链接加到收藏夹或者拖到书签栏，而不是点我");
     return
   }
-  if (document.domain.toLowerCase().indexOf("acfun.") < 0) {
-    alert("进AcFun，开个视频，再点我...");
-    return
-  }
-  $.info("欢迎使用 AcFun Fix Fix 2016-4-15 E-mail:liriansu@gmail.com");
-  $.info("遇到问题可以到 http://liriansu.com/acfunfixfix 这里提");
-  var source = $("a.active.primary").data("from");
+  $.info("欢迎使用 AcFun Fix Fix 2016-4-25");
+  $.info("工具更新与Bug反馈页面 http://liriansu.com/acfunfixfix");
   window._getPlayer = function() {
     return document.getElementById("ACFlashPlayer-re") || document.getElementById("not-ACFlashPlayer-re") || document.getElementById("area-player");
   };
+  if (null == _getPlayer()) {
+    alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
+    return
+  }
+  var source = $("a.active.primary").data("from");
   window.c = function(d, e) {
     player = _getPlayer();
     if (player.id == 'area-player') {
