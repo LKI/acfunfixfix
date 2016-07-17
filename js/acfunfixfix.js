@@ -14,7 +14,8 @@
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
-  $.info("欢迎使用 AcFun Fix Fix 2016-4-25");
+  $.info("欢迎使用 AcFun Fix Fix 2016-07-17");
+  $.info("目前部分优酷源和腾讯源视频转换白屏，修复中");
   $.info("工具更新与Bug反馈页面 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.c = function(d, e) {
