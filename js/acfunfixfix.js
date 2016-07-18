@@ -15,8 +15,9 @@
     return
   }
   $.info("欢迎使用 AcFun Fix Fix 2016-07-18");
-  $.info("之前主站API变化导致黑科技不可用，但少女应该解决了问题");
-  $.info("更多信息请见 http://liriansu.com/acfunfixfix");
+  $.info("之前主站API变化导致黑科技不可用，但少女解决了该问题");
+  $.info("部分新浪源视频年久失修，已经难以抢救了 T_T");
+  $.info("更多信息/反馈Bug请见 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.setupPlayer = function(d, e) {
     player = _getPlayer();
