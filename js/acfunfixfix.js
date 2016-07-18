@@ -14,18 +14,17 @@
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
-  $.info("欢迎使用 目前失效了的AcFun Fix Fix 2016-07-17");
-  $.info("由于主站API变化，黑科技失效了");
-  $.info("少女解决中...（不过不一定能修复好）");
-  $.info("更多信息请见：http://liriansu.com/acfunfixfix");
+  $.info("欢迎使用 AcFun Fix Fix 2016-07-18");
+  $.info("之前主站API变化导致黑科技不可用，但少女应该解决了问题");
+  $.info("更多信息请见 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
-  window.setupPlayer = function(swf_loc, vid) {
+  window.setupPlayer = function(d, e) {
     player = _getPlayer();
     if (player.id == 'area-player') {
       $(player).html('<div class="inner ui-draggable"><iframe id="ACFlashPlayer-re" ></iframe></div>');
       player = document.getElementById("ACFlashPlayer-re");
     };
-    player.outerHTML = '<object style="visibility:visible;width:100%;height:100%" id="not-ACFlashPlayer-re" data="' + swf_loc + '" allowscriptaccess="always" allowfullscreen="true" allowfullscreeninteractive="true" type="application/x-shockwave-flash"><param value="true" name="allowFullscreenInteractive"><param value="true" name="allowfullscreen"><param value="always" name="allowscriptaccess"><param name="flashvars" value="vid=' + vid + '&videoId=' + vid + '&fs=0&autoplay=0&host=http://www.liriansu.com&avatar=&hint=小贴士：播放器右下的四个按钮依次是屏蔽弹幕、循环视频、详细设置和全屏播放。&oldcs=1&allowFullscreenInteractive=true&allowfullscreen=true&allowscriptaccess=always"><param name=movie value="' + swf_loc + '"></object>'
+    player.outerHTML = '<object style="visibility:visible;width:100%;height:100%" id="not-ACFlashPlayer-re" data="' + d + '" src="' + d + '" allowscriptaccess="always" allowfullscreen="true" allowfullscreeninteractive="true" type="application/x-shockwave-flash"><param value="true" name="allowFullscreenInteractive"><param value="true" name="allowfullscreen"><param value="always" name="allowscriptaccess"><param value="' + e + '" name="flashvars"><param name=movie value="' + d + '"></object>'
   };
   if (!document.getElementById("video-download") && source != "iqiyi" && source != "pps") {
     $("#txt-title-view").append('<span id="video-download"><a class="btn primary" href="http://www.liriansu.com/acfunfixfix/danmaku.html?vid='+$("a.active.primary").data("vid")+'&p='+(location.href.match(/_(\d+)/)?location.href.match(/_(\d+)/)[1]:"1")+'" title="视频下载" style="float:none;color:#fff;margin-left:8px;" target="_blank"><i class="icon icon-download"></i>详细信息及下载</a></span>')
@@ -64,7 +63,7 @@
     });
   };
   if (source != "letv" && source != "zhuzhan" && source != "ac") {
-    setupPlayer("http://cdn.aixifan.com/player/ACFlashPlayer.out.swf", $("a.active.primary").data("vid"));
+    setupPlayer("http://www.talkshowcn.com/AcPlayer201412121.swf", "oldcs=1&host=http://www.talkshowcn.com&vid=" + $("a.active.primary").data("vid") + "|" + source + "|" + $("a.active.primary").data("sid"));
     if (!document.getElementById("refresh-player")) {$("#video-download").append('<a id="refresh-player" class="btn primary" onclick="$(_getPlayer()).prop(\'outerHTML\',$(_getPlayer()).prop(\'outerHTML\'))" style="float:none;color:#fff;margin-left:8px;" target="_blank"><i class="icon icon-refresh"></i>解析失败请点我刷新</a>');};
     $.info("视频源类型：" + sourceList[source]);
   }else{
