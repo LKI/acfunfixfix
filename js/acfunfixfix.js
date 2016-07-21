@@ -14,9 +14,9 @@
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
-  $.info("欢迎使用 AcFun Fix Fix 2016-07-18");
-  $.info("之前主站API变化导致黑科技不可用，但少女解决了该问题");
-  $.info("部分新浪源视频年久失修，已经难以抢救了 T_T");
+  $.info("欢迎使用 AcFun Fix Fix 2016-07-21");
+  $.info("目前由于talkshowcn.com挂了，黑科技不可用。");
+  $.info("少女修复中...");
   $.info("更多信息/反馈Bug请见 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.setupPlayer = function(d, e) {
