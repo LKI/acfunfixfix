@@ -7,23 +7,30 @@
     alert("把这个链接加到收藏夹或者拖到书签栏，而不是点我");
     return
   }
+  window._log = function(msg) {
+    if ($.info.show) {
+      $.info.show(msg);
+    } else {
+      $.info(msg);
+    }
+  }
   window._getPlayer = function() {
-    return document.getElementById("ACFlashPlayer-re") || document.getElementById("not-ACFlashPlayer-re") || document.getElementById("area-player");
+    return document.getElementById("ACFlashPlayer") || document.getElementById("ACFlashPlayer-re") || document.getElementById("not-ACFlashPlayer-re") || document.getElementById("area-player");
   };
   if (null == _getPlayer()) {
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
-  $.info("欢迎使用 AcFun Fix Fix 2016-07-21");
-  $.info("目前由于talkshowcn.com挂了，黑科技不可用。");
-  $.info("少女修复中...");
-  $.info("更多信息/反馈Bug请见 http://liriansu.com/acfunfixfix");
+  _log("欢迎使用 AcFun Fix Fix 2016-10-15");
+  _log("目前由于主站弹幕接口改版，V2->V3，所以弹幕不一定能正常显示");
+  _log("天下漫友是一家，缺B乐，[]~(￣▽￣)~*乾杯");
+  _log("更多信息/反馈Bug请见 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.setupPlayer = function(d, e) {
     player = _getPlayer();
     if (player.id == 'area-player') {
       $(player).html('<div class="inner ui-draggable"><iframe id="ACFlashPlayer-re" ></iframe></div>');
-      player = document.getElementById("ACFlashPlayer-re");
+      player = document.getElementById("ACFlashPlayer-re") || document.getElementById("ACFlashPlayer");
     };
     player.outerHTML = '<object style="visibility:visible;width:100%;height:100%" id="not-ACFlashPlayer-re" data="' + d + '" src="' + d + '" allowscriptaccess="always" allowfullscreen="true" allowfullscreeninteractive="true" type="application/x-shockwave-flash"><param value="true" name="allowFullscreenInteractive"><param value="true" name="allowfullscreen"><param value="always" name="allowscriptaccess"><param value="' + e + '" name="flashvars"><param name=movie value="' + d + '"></object>'
   };
@@ -66,8 +73,8 @@
   if (source != "letv" && source != "zhuzhan" && source != "ac") {
     setupPlayer("http://www.talkshowcn.com/AcPlayer201412121.swf", "oldcs=1&host=http://www.talkshowcn.com&vid=" + $("a.active.primary").data("vid") + "|" + source + "|" + $("a.active.primary").data("sid"));
     if (!document.getElementById("refresh-player")) {$("#video-download").append('<a id="refresh-player" class="btn primary" onclick="$(_getPlayer()).prop(\'outerHTML\',$(_getPlayer()).prop(\'outerHTML\'))" style="float:none;color:#fff;margin-left:8px;" target="_blank"><i class="icon icon-refresh"></i>解析失败请点我刷新</a>');};
-    $.info("视频源类型：" + sourceList[source]);
+    _log("视频源类型：" + sourceList[source]);
   }else{
-    $.info("本程序不会对 乐视云源和主站视频源 进行任何处理，出现问题是 AcFun 的问题，请联系客服。");
+    _log("本程序不会对 乐视云源和主站视频源 进行任何处理，出现问题是 AcFun 的问题，请联系客服。");
   }
 })();
