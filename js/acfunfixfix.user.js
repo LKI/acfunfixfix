@@ -2,10 +2,10 @@
 // @name        AcFun Fix Fix
 // @namespace   http://www.liriansu.com/acfunfixfix/
 // @description Acfun Fix Fix, 基于AcFun Fix的播放器修复黑科技
-// @include     http://www.acfun.tv/v/*
-// @include     http://acfun.tv/v/*
-// @include     http://hengyang.acfun.tv/v/*
-// @include     http://wenzhou.acfun.tv/v/*
+// @include     http://www.acfun.cn/v/*
+// @include     http://acfun.cn/v/*
+// @include     http://hengyang.acfun.cn/v/*
+// @include     http://wenzhou.acfun.cn/v/*
 // @include     http://acfun.tudou.com/v/*
 // @version     1.0.0.2
 // @grant       none

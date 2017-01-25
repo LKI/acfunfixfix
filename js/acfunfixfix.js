@@ -61,7 +61,7 @@
   };
   if(typeof(sourceList[source]) == "undefined"){
     $.ajax({
-      url: "http://www.acfun.tv/video/getVideo.aspx?id="+$("a.active.primary").data("vid"),
+      url: "http://www.acfun.cn/video/getVideo.aspx?id="+$("a.active.primary").data("vid"),
       async: false,
       success:function(data){
         $("a.active.primary").data("from",data.sourceType);
