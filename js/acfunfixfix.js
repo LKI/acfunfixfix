@@ -21,10 +21,8 @@
     alert("没有找到可以转换的播放器，可能是你没进AcFun视频页面，也有可能是个Bug");
     return
   }
-  _log("欢迎使用 AcFun Fix Fix 2016-10-15");
-  _log("目前由于主站弹幕接口改版，V2->V3，所以弹幕不一定能正常显示");
+  _log("欢迎使用 AcFun Fix Fix 2017-01-25");
   _log("天下漫友是一家，缺B乐，[]~(￣▽￣)~*乾杯");
-  _log("更多信息/反馈Bug请见 http://liriansu.com/acfunfixfix");
   var source = $("a.active.primary").data("from");
   window.setupPlayer = function(d, e) {
     player = _getPlayer();
